@@ -41,3 +41,12 @@ Feature: Interacting with a Safe
     Then the safe should be locked
     And the door should be closed
     And the display shows CLOSED
+
+  Scenario: Forgetting key button
+    Given I have a safe
+    And the safe is locked
+    And the door is closed
+    When I hit the 1 button
+    Then the display shows ERROR
+    When I hit any button except the key button
+    Then the display shows ERROR
