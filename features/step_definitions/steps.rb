@@ -1,8 +1,10 @@
 class Safe
   attr_accessor :pin
+  attr_reader :display
 
   def initialize
     @pin = "123456"
+    @display = "ERROR"
   end
 
   def press(button)
@@ -26,5 +28,5 @@ When(/^I hit the (\w+) button$/) do |button|
 end
 
 Then(/^the display shows ERROR$/) do
-  pending # express the regexp above with the code you wish you had
+  @safe.display.should eq("ERROR")
 end
