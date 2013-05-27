@@ -2,11 +2,13 @@ class Safe
   attr_accessor :pin
   attr_reader :display
   attr_accessor :lock
+  attr_accessor :door
 
   def initialize
     @pin = "123456"
     @display = "ERROR"
     @lock = :locked
+    @door = :closed
   end
 
   def press(button)
@@ -38,7 +40,7 @@ Given(/^the safe is locked$/) do
 end
 
 Given(/^the door is closed$/) do
-  pending # express the regexp above with the code you wish you had
+  @safe.door.should eq(:closed)
 end
 
 Then(/^the display is empty$/) do
