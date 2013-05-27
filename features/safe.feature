@@ -98,10 +98,10 @@ Feature: Interacting with a Safe
     Then the display shows CODE
     And the safe should be unlocked
     When the door is closed
-    And I hit the lock button
+    And I hit the LOCK button
     Then the safe should be locked
     And the door should be closed
-    When I hit the key button
+    When I hit the KEY button
     And I hit the 7 button
     When I hit the 7 button
     When I hit the 7 button
