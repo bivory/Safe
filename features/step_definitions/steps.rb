@@ -2,14 +2,16 @@ class SafeState
   attr_accessor :display
   attr_accessor :input
   attr_accessor :lock
+  attr_accessor :door
 
-  def initialize(display_text: "", lock: :locked)
+  def initialize(display_text: "", lock: :locked, door: :closed)
     @input = {}
     @input[:pin] = "PIN"
     @input[:key] = "KEY"
 
     @display = display_text
     @lock = lock
+    @door = door
   end
 
   def transition(input)
@@ -84,17 +86,18 @@ end
 
 class Safe
   attr_accessor :pin
-  attr_accessor :door
 
   def initialize
     @pin = "123456"
-    @lock = :locked
-    @door = :closed
     @state = SafeStateReady.new
   end
 
   def lock
     @state.lock
+  end
+
+  def door
+    @state.door
   end
 
   def display
@@ -142,5 +145,6 @@ Given(/^the door is closed$/) do
 end
 
 Then(/^the door can be opened$/) do
-  pending # express the regexp above with the code you wish you had
+  @safe.door.should eq(:closed)
+  @safe.lock.should eq(:unlocked)
 end
