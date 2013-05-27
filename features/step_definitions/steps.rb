@@ -1,5 +1,10 @@
+class Safe
+  def initialize
+  end
+end
+
 Given(/^I have a safe$/) do
-  pending # express the regexp above with the code you wish you had
+  Safe.new
 end
 
 Then(/^the PIN should be (\d+)$/) do |arg1|
