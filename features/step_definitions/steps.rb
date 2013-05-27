@@ -41,3 +41,8 @@ Then(/^the door can be opened$/) do
   @safe.door.should eq(:closed)
   @safe.lock.should eq(:unlocked)
 end
+
+When(/^I close the door$/) do
+  @safe.door :closed
+  @safe.door.should eq(:closed)
+end
