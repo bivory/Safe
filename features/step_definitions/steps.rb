@@ -30,3 +30,31 @@ end
 Then(/^the display shows ERROR$/) do
   @safe.display.should eq("ERROR")
 end
+
+Given(/^the safe is locked$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^the door is closed$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the display is empty$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the display shows (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the display shows OPEN$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the safe is unlocked$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the door can be opened$/) do
+  pending # express the regexp above with the code you wish you had
+end
