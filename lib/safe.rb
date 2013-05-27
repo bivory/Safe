@@ -3,8 +3,9 @@ class SafeState
   attr_accessor :input
   attr_reader :lock
   attr_reader :door
+  attr_reader :pin
 
-  def initialize(display_text: "", lock: :locked, door: :closed)
+  def initialize(display_text: "", lock: :locked, door: :closed, pin: "123456")
     @input = {}
     @input[:pin] = "PIN"
     @input[:key] = "KEY"
@@ -15,6 +16,7 @@ class SafeState
     self.lock = lock
     self.door = door
     @display = display_text
+    @pin = pin
   end
 
   def lock=(lock_state)
@@ -99,11 +101,15 @@ class SafeStateUnlocking < SafeState
   def transition(input)
     case input
     when 0..9
-      @value << input
+      @value << input.to_s
       @display = input
 
       if @value.length == @pin_length
-        SafeState.new display_text: "OPEN", lock: :unlocked
+        if @value.to_s == @pin.to_s
+          SafeState.new display_text: "OPEN", lock: :unlocked
+        else
+          SafeState.new
+        end
       else
         self
       end
@@ -114,11 +120,12 @@ class SafeStateUnlocking < SafeState
 end
 
 class Safe
-  attr_accessor :pin
+  def initialize()
+    @state = SafeState.new
+  end
 
-  def initialize(lock: :locked)
-    @pin = "123456"
-    @state = SafeState.new lock: lock
+  def pin()
+    @state.pin
   end
 
   def lock()
