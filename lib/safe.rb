@@ -84,7 +84,7 @@ class SafeStateNewPin < SafeState
         SafeStateError.new pin: @pin, door: @door, lock: @lock
       end
     when 0..9
-      @value << input
+      @value << input.to_s
       self
     else
       SafeStateError.new pin: @pin, door: @door, lock: @lock
