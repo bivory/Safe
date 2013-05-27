@@ -83,9 +83,9 @@ end
 class Safe
   attr_accessor :pin
 
-  def initialize
+  def initialize(lock: :locked)
     @pin = "123456"
-    @state = SafeState.new
+    @state = SafeState.new lock: lock
   end
 
   def lock

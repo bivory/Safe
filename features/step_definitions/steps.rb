@@ -2,6 +2,10 @@ Given(/^I have a safe$/) do
   @safe = Safe.new
 end
 
+Given(/^I have an unlocked safe$/) do
+  @safe = Safe.new lock: :unlocked
+end
+
 Then(/^the PIN should be (\d+)$/) do |pin|
   @safe.pin.should eq(pin.to_s)
 end

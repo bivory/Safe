@@ -35,9 +35,7 @@ Feature: Interacting with a Safe
     And the door can be opened
 
   Scenario: Locking a safe
-    Given I have a safe
-    And the safe is unlocked
-    And the door is closed
+    Given I have an unlocked safe
     Then the display shows OPEN
     When I close the door
     And I hit the lock button
