@@ -2,8 +2,8 @@ Given(/^I have a safe$/) do
   @safe = Safe.new
 end
 
-Then(/^the PIN should be (\d+)$/) do |arg1|
-  @safe.pin.should eq("123456")
+Then(/^the PIN should be (\d+)$/) do |pin|
+  @safe.pin.should eq(pin.to_s)
 end
 
 Then(/^the PIN should be (\d+) digits$/) do |arg1|
