@@ -68,3 +68,17 @@ Feature: Interacting with a Safe
     Then the display shows ERROR
     When I hit the LOCK button
     Then the display shows ERROR
+
+  Scenario: Wrong Code
+    Given I have a safe
+    And the door is locked
+    And the door is closed
+    When I hit the key button
+    And I hit the 1 button
+    When I hit the 2 button
+    When I hit the 4 button
+    When I hit the 3 button
+    When I hit the 5 button
+    When I hit the 6 button
+    Then the display is empty
+    And the safe is locked
