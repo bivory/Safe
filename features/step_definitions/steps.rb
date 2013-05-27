@@ -36,6 +36,11 @@ Given(/^the door is closed$/) do
   @safe.is_door_open?.should eq(false)
 end
 
+Given(/^the door is open$/) do
+  @safe.open_door
+  @safe.is_door_open?.should eq(true)
+end
+
 Then(/^the door can be opened$/) do
   @safe.is_door_open?.should eq(false)
   @safe.is_locked?.should eq(false)
