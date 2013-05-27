@@ -4,15 +4,11 @@ Feature: Interacting with a Safe
     Then the PIN should be 123456
     And the PIN should be 6 digits
 
-  Scenario: Successfully setting the PIN to a safe
-    Given I have a safe
-    When I set the PIN to 111111
-    Then the PIN should be 111111
-    And the PIN should be 6 digits
-
   Scenario: Unsuccessfully setting the PIN to a safe
     Given I have a safe
-    When I set the PIN to 1
+    When I hit the PIN button
+    And I hit the 1 button
+    And I hit the PIN button
     Then the display shows ERROR
     And the PIN should be 123456
     And the PIN should be 6 digits
@@ -34,8 +30,7 @@ Feature: Interacting with a Safe
     When I hit the 5 button
     Then the display shows 5
     When I hit the 6 button
-    Then the display shows 6
-    And the display shows OPEN
+    Then the display shows OPEN
     And the safe is unlocked
     And the door can be opened
 
