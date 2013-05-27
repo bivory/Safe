@@ -18,7 +18,7 @@ Feature: Interacting with a Safe
     And the safe is locked
     And the door is closed
     Then the display shows nothing
-    When I hit the key button
+    When I hit the KEY button
     And I hit the 1 button
     Then the display shows 1
     When I hit the 2 button
