@@ -20,6 +20,8 @@ class SafeState
   def lock=(lock_state)
     if not [:locked, :unlocked].include?(lock_state)
       raise "Bad lock state #{lock_state}"
+    elsif lock_state == :lock and @door == :open then
+      raise "Bad lock state #{lock_state} while door is #{@door}"
     end
     @lock = lock_state
     if @lock == :unlocked then
@@ -32,6 +34,8 @@ class SafeState
   def door=(door_state)
     if not [:opened, :closed].include?(door_state)
       raise "Bad door state #{door_state}"
+    elsif door_state == :opened and @lock == :locked then
+      raise "Bad door state #{door_state} while lock is #{@lock}"
     end
     @door = door_state
   end
