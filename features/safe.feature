@@ -82,3 +82,32 @@ Feature: Interacting with a Safe
     When I hit the 6 button
     Then the display shows nothing
     And the safe should be locked
+
+  Scenario: Setting a new code
+    Given I have a safe
+    And the safe is unlocked
+    And the door is open
+    When I hit the PIN button
+    And I hit the 7 button
+    And I hit the 7 button
+    And I hit the 7 button
+    And I hit the 3 button
+    And I hit the 3 button
+    And I hit the 3 button
+    And I hit the PIN button
+    Then the display shows CODE
+    And the safe should be unlocked
+    When the door is closed
+    And I hit the lock button
+    Then the safe should be locked
+    And the door should be closed
+    When I hit the key button
+    And I hit the 7 button
+    When I hit the 7 button
+    When I hit the 7 button
+    When I hit the 3 button
+    When I hit the 3 button
+    When I hit the 3 button
+    And the display shows OPEN
+    And the safe should be unlocked
+    And the door can be opened
