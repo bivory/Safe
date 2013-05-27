@@ -53,8 +53,10 @@ class SafeState
       else
         SafeStateError.new
       end
-    else
+    when 0..9
       SafeStateError.new
+    else
+      raise "Unknown button press: #{input}"
     end
   end
 end

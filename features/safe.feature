@@ -73,12 +73,12 @@ Feature: Interacting with a Safe
     Given I have a safe
     And the safe is locked
     And the door is closed
-    When I hit the key button
+    When I hit the KEY button
     And I hit the 1 button
     When I hit the 2 button
     When I hit the 4 button
     When I hit the 3 button
     When I hit the 5 button
     When I hit the 6 button
-    Then the display is empty
-    And the safe is locked
+    Then the display shows nothing
+    And the safe should be locked
