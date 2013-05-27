@@ -36,7 +36,7 @@ Feature: Interacting with a Safe
     Given I have a safe
     And the safe is unlocked
     Then the display shows OPEN
-    When I close the door
+    When the door is closed
     And I hit the LOCK button
     Then the safe should be locked
     And the door should be closed
