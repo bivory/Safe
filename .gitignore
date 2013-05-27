@@ -6,3 +6,5 @@
 *.swo
 
 todo
+
+Gemfile.lock
