@@ -31,8 +31,11 @@ When(/^I hit the (\w+) button$/) do |button|
   @safe.press button
 end
 
-Then(/^the display shows ERROR$/) do
-  @safe.display.should eq("ERROR")
+Then(/^the display shows (\w+)$/) do |message|
+  if message == "nothing" then
+    message = ""
+  end
+  @safe.display.should eq(message)
 end
 
 Given(/^the safe is locked$/) do
@@ -41,18 +44,6 @@ end
 
 Given(/^the door is closed$/) do
   @safe.door.should eq(:closed)
-end
-
-Then(/^the display is empty$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the display shows (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the display shows OPEN$/) do
-  pending # express the regexp above with the code you wish you had
 end
 
 Then(/^the safe is unlocked$/) do

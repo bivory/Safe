@@ -17,7 +17,7 @@ Feature: Interacting with a Safe
     Given I have a safe
     And the safe is locked
     And the door is closed
-    Then the display is empty
+    Then the display shows nothing
     When I hit the key button
     And I hit the 1 button
     Then the display shows 1
