@@ -5,7 +5,7 @@ class Safe
     @pin = "123456"
   end
 
-  def press_pin
+  def press(button)
   end
 end
 
@@ -21,12 +21,8 @@ Then(/^the PIN should be (\d+) digits$/) do |arg1|
   @safe.pin.length.should eq(6)
 end
 
-When(/^I hit the PIN button$/) do
-  @safe.press_pin
-end
-
-When(/^I hit the (\d+) button$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I hit the (\w+) button$/) do |button|
+  @safe.press button
 end
 
 Then(/^the display shows ERROR$/) do
