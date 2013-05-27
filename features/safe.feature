@@ -48,5 +48,23 @@ Feature: Interacting with a Safe
     And the door is closed
     When I hit the 1 button
     Then the display shows ERROR
-    When I hit any button except the key button
+    When I hit the 2 button
+    Then the display shows ERROR
+    When I hit the 3 button
+    Then the display shows ERROR
+    When I hit the 4 button
+    Then the display shows ERROR
+    When I hit the 5 button
+    Then the display shows ERROR
+    When I hit the 6 button
+    Then the display shows ERROR
+    When I hit the 7 button
+    Then the display shows ERROR
+    When I hit the 8 button
+    Then the display shows ERROR
+    When I hit the 9 button
+    Then the display shows ERROR
+    When I hit the 0 button
+    Then the display shows ERROR
+    When I hit the LOCK button
     Then the display shows ERROR

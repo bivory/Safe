@@ -47,7 +47,7 @@ class SafeState
     when @input[:key]
       SafeStateUnlocking.new
     when @input[:lock]
-      if @door == :closed
+      if @door == :closed and @lock == :unlocked
         self.lock = :locked
         self
       else
