@@ -9,6 +9,8 @@ class SafeState
     @input[:pin] = "PIN"
     @input[:key] = "KEY"
 
+    @pin_length = 6
+
     @display = display_text
     @lock = lock
     @door = door
@@ -41,7 +43,7 @@ class SafeStateNewPin < SafeState
   def transition(input)
     case input
     when @input[:pin]
-      if @value.length == 6
+      if @value.length == @pin_length
         SafeState.new ""
       else
         SafeStateError.new
@@ -67,7 +69,7 @@ class SafeStateUnlocking < SafeState
       @value << input
       @display = input
 
-      if @value.length == 6
+      if @value.length == @pin_length
         SafeState.new display_text: "OPEN", lock: :unlocked
       else
         self
