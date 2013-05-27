@@ -1,7 +1,7 @@
 class SafeState
   attr_accessor :display
   attr_accessor :input
-  attr_accessor :lock
+  attr_reader :lock
   attr_accessor :door
 
   def initialize(display_text: "", lock: :locked, door: :closed)
@@ -12,8 +12,15 @@ class SafeState
     @pin_length = 6
 
     @display = display_text
-    @lock = lock
+    self.lock = lock
     @door = door
+  end
+
+  def lock=(lock_state)
+    @lock = lock_state
+    if @lock == :unlocked then
+      @display = "OPEN"
+    end
   end
 
   def transition(input)
