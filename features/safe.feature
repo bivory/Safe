@@ -12,3 +12,24 @@ Feature: Interacting with a Safe
     Then the display shows ERROR
     And the PIN should be 123456
     And the PIN should be 6 digits
+
+  Scenario: Unlocking a safe
+    Given I have a safe
+    And the safe is locked
+    And the door is closed
+    Then the display is empty
+    When I hit the key button
+    And I hit the 1 button
+    Then the display shows 1
+    When I hit the 2 button
+    Then the display shows 2
+    When I hit the 3 button
+    Then the display shows 3
+    When I hit the 4 button
+    Then the display shows 4
+    When I hit the 5 button
+    Then the display shows 5
+    When I hit the 6 button
+    Then the display shows OPEN
+    And the safe is unlocked
+    And the door can be opened
