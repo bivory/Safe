@@ -15,8 +15,6 @@ Feature: Interacting with a Safe
 
   Scenario: Unlocking a safe
     Given I have a safe
-    And the safe is locked
-    And the door is closed
     Then the display shows nothing
     When I hit the KEY button
     And I hit the 1 button
@@ -31,14 +29,15 @@ Feature: Interacting with a Safe
     Then the display shows 5
     When I hit the 6 button
     Then the display shows OPEN
-    And the safe is unlocked
+    And the safe should be unlocked
     And the door can be opened
 
   Scenario: Locking a safe
-    Given I have an unlocked safe
+    Given I have a safe
+    And the safe is unlocked
     Then the display shows OPEN
     When I close the door
-    And I hit the lock button
-    Then the door is locked
-    And the door is closed
+    And I hit the LOCK button
+    Then the safe should be locked
+    And the door should be closed
     And the display shows CLOSED

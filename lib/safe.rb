@@ -8,22 +8,31 @@ class SafeState
     @input = {}
     @input[:pin] = "PIN"
     @input[:key] = "KEY"
+    @input[:lock] = "LOCK"
 
     @pin_length = 6
 
-    @display = display_text
     self.lock = lock
     self.door = door
+    @display = display_text
   end
 
   def lock=(lock_state)
+    if not [:locked, :unlocked].include?(lock_state)
+      raise "Bad lock state #{lock_state}"
+    end
     @lock = lock_state
     if @lock == :unlocked then
       @display = "OPEN"
+    else
+      @display = "CLOSED"
     end
   end
 
   def door=(door_state)
+    if not [:opened, :closed].include?(door_state)
+      raise "Bad door state #{door_state}"
+    end
     @door = door_state
   end
 
@@ -33,6 +42,13 @@ class SafeState
       SafeStateNewPin.new
     when @input[:key]
       SafeStateUnlocking.new
+    when @input[:lock]
+      if @door == :closed
+        self.lock = :locked
+        self
+      else
+        SafeStateError.new
+      end
     else
       SafeStateError.new
     end
@@ -99,16 +115,28 @@ class Safe
     @state = SafeState.new lock: lock
   end
 
-  def lock
-    @state.lock
+  def lock()
+    @state.lock = :locked
   end
 
-  def door(door=nil)
-    if door.nil? then
-      @state.door
-    else
-      @state.door = door
-    end
+  def unlock()
+    @state.lock = :unlocked
+  end
+
+  def is_locked?()
+    @state.lock == :locked
+  end
+
+  def close_door()
+    @state.door = :closed
+  end
+
+  def open_door()
+    @state.door = :opened
+  end
+
+  def is_door_open?()
+    @state.door == :opened
   end
 
   def display
