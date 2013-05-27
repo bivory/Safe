@@ -15,8 +15,8 @@ class SafeState
 
     self.lock = lock
     self.door = door
-    @display = display_text
     @pin = pin
+    @display = display_text
   end
 
   def lock=(lock_state)
@@ -45,18 +45,18 @@ class SafeState
   def transition(input)
     case input
     when @input[:pin]
-      SafeStateNewPin.new
+      SafeStateNewPin.new pin: @pin, door: @door, lock: @lock
     when @input[:key]
-      SafeStateUnlocking.new
+      SafeStateUnlocking.new pin: @pin, door: @door, lock: @lock
     when @input[:lock]
       if @door == :closed and @lock == :unlocked
         self.lock = :locked
         self
       else
-        SafeStateError.new
+        SafeStateError.new pin: @pin, door: @door, lock: @lock
       end
     when 0..9
-      SafeStateError.new
+      SafeStateError.new pin: @pin, door: @door, lock: @lock
     else
       raise "Unknown button press: #{input}"
     end
@@ -64,14 +64,14 @@ class SafeState
 end
 
 class SafeStateError < SafeState
-  def initialize(display_text: "ERROR")
-    super(display_text: display_text)
+  def initialize(display_text: "ERROR", lock: :locked, door: :closed, pin: "123456")
+    super(display_text: display_text, lock: lock, door: door, pin: pin)
   end
 end
 
 class SafeStateNewPin < SafeState
-  def initialize()
-    super()
+  def initialize(display_text: "", lock: :locked, door: :closed, pin: "123456")
+    super(display_text: display_text, lock: lock, door: door, pin: pin)
     @value = ""
   end
 
@@ -79,22 +79,22 @@ class SafeStateNewPin < SafeState
     case input
     when @input[:pin]
       if @value.length == @pin_length
-        SafeState.new ""
+        SafeState.new display_text: "CODE", pin: @value, door: @door, lock: @lock
       else
-        SafeStateError.new
+        SafeStateError.new pin: @pin, door: @door, lock: @lock
       end
     when 0..9
       @value << input
       self
     else
-      SafeStateError.new
+      SafeStateError.new pin: @pin, door: @door, lock: @lock
     end
   end
 end
 
 class SafeStateUnlocking < SafeState
-  def initialize()
-    super()
+  def initialize(display_text: "", lock: :locked, door: :closed, pin: "123456")
+    super(display_text: display_text, lock: lock, door: door, pin: pin)
     @value = ""
   end
 
@@ -106,15 +106,15 @@ class SafeStateUnlocking < SafeState
 
       if @value.length == @pin_length
         if @value.to_s == @pin.to_s
-          SafeState.new display_text: "OPEN", lock: :unlocked
+          SafeState.new display_text: "OPEN", lock: :unlocked, door: @door
         else
-          SafeState.new
+          SafeState.new pin: @pin, door: @door, lock: @lock
         end
       else
         self
       end
     else
-      SafeStateError.new
+      SafeStateError.new pin: @pin, door: @door, lock: @lock
     end
   end
 end
