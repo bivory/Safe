@@ -71,7 +71,7 @@ Feature: Interacting with a Safe
 
   Scenario: Wrong Code
     Given I have a safe
-    And the door is locked
+    And the safe is locked
     And the door is closed
     When I hit the key button
     And I hit the 1 button
