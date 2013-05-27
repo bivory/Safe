@@ -1,13 +1,15 @@
 class SafeState
   attr_accessor :display
   attr_accessor :input
+  attr_accessor :lock
 
-  def initialize(display_text="")
+  def initialize(display_text: "", lock: :locked)
     @input = {}
     @input[:pin] = "PIN"
     @input[:key] = "KEY"
 
     @display = display_text
+    @lock = lock
   end
 
   def transition(input)
@@ -16,8 +18,8 @@ class SafeState
 end
 
 class SafeStateError < SafeState
-  def initialize(display_text="ERROR")
-    super(display_text)
+  def initialize(display_text: "ERROR")
+    super(display_text: display_text)
   end
 end
 
@@ -35,8 +37,8 @@ class SafeStateReady < SafeState
 end
 
 class SafeStateNewPin < SafeState
-  def initialize(display_text="")
-    super(display_text)
+  def initialize()
+    super()
     @value = ""
   end
 
@@ -58,8 +60,8 @@ class SafeStateNewPin < SafeState
 end
 
 class SafeStateUnlocking < SafeState
-  def initialize(display_text="")
-    super(display_text)
+  def initialize()
+    super()
     @value = ""
   end
 
@@ -70,7 +72,7 @@ class SafeStateUnlocking < SafeState
       @display = input
 
       if @value.length == 6
-        SafeStateReady.new "OPEN"
+        SafeStateReady.new display_text: "OPEN", lock: :unlocked
       else
         self
       end
@@ -82,7 +84,6 @@ end
 
 class Safe
   attr_accessor :pin
-  attr_accessor :lock
   attr_accessor :door
 
   def initialize
@@ -90,6 +91,10 @@ class Safe
     @lock = :locked
     @door = :closed
     @state = SafeStateReady.new
+  end
+
+  def lock
+    @state.lock
   end
 
   def display
@@ -128,12 +133,12 @@ Given(/^the safe is locked$/) do
   @safe.lock.should eq(:locked)
 end
 
-Given(/^the door is closed$/) do
-  @safe.door.should eq(:closed)
+Then(/^the safe is unlocked$/) do
+  @safe.lock.should eq(:unlocked)
 end
 
-Then(/^the safe is unlocked$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^the door is closed$/) do
+  @safe.door.should eq(:closed)
 end
 
 Then(/^the door can be opened$/) do
