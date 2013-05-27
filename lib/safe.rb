@@ -15,18 +15,6 @@ class SafeState
   end
 
   def transition(input)
-    SafeState.new
-  end
-end
-
-class SafeStateError < SafeState
-  def initialize(display_text: "ERROR")
-    super(display_text: display_text)
-  end
-end
-
-class SafeStateReady < SafeState
-  def transition(input)
     case input
     when @input[:pin]
       SafeStateNewPin.new
@@ -35,6 +23,12 @@ class SafeStateReady < SafeState
     else
       SafeStateError.new
     end
+  end
+end
+
+class SafeStateError < SafeState
+  def initialize(display_text: "ERROR")
+    super(display_text: display_text)
   end
 end
 
@@ -48,11 +42,11 @@ class SafeStateNewPin < SafeState
     case input
     when @input[:pin]
       if @value.length == 6
-        SafeStateReady.new ""
+        SafeState.new ""
       else
         SafeStateError.new
       end
-    when /^[0-9]$/
+    when 0..9
       @value << input
       self
     else
@@ -69,12 +63,12 @@ class SafeStateUnlocking < SafeState
 
   def transition(input)
     case input
-    when /^[0-9]$/
+    when 0..9
       @value << input
       @display = input
 
       if @value.length == 6
-        SafeStateReady.new display_text: "OPEN", lock: :unlocked
+        SafeState.new display_text: "OPEN", lock: :unlocked
       else
         self
       end
@@ -89,7 +83,7 @@ class Safe
 
   def initialize
     @pin = "123456"
-    @state = SafeStateReady.new
+    @state = SafeState.new
   end
 
   def lock
