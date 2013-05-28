@@ -96,6 +96,8 @@ Feature: Interacting with a Safe
     And I hit the 3 button
     And I hit the PIN button
     Then the display shows CODE
+    And the PIN should be 777333
+    And the PIN should be 6 digits
     And the safe should be unlocked
     When the door is closed
     And I hit the LOCK button
