@@ -4,16 +4,18 @@ Safe is an example of BDD in [Ruby](http://www.ruby-lang.org/) using [Cucumber](
 
 ## Cloning the repository
 
-Run `git clone https://github.com/bivory/safe.git` to clone the repository. Follow the installation steps in the following sections to setup the dependencies.
+Run `git clone https://github.com/bivory/Safe.git` to clone the repository. Follow the installation steps in the following sections to setup the dependencies.
 
 ## Ubuntu Installation
 
-`gem install bundler` to install the dependencies.
+`gem install bundler` to install Bundler.
+Run the `bundle` command i the root directory to install the dependencies.
 
 ## OS X Installation
 
 `brew install ruby` (2.0.0) using [Homebrew](http://brew.sh/).
-`gem install bundler` to install the dependencies.
+`gem install bundler` to install Bundler.
+Run the `bundle` command i the root directory to install the dependencies.
 
 ## How to run the tests
 
