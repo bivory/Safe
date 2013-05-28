@@ -17,6 +17,7 @@ class SafeState
     self.door = door
     @pin = pin
     @display = display_text
+    #puts "#{self.class} Door #{@door}, Lock #{@lock}, new PIN #{@pin}" # DEBUG
   end
 
   def lock=(lock_state)
@@ -157,7 +158,9 @@ class Safe
   end
 
   def press(button)
+    # puts "press #{button}, #{@state.class}" # DEBUG
     @state = @state.transition button
+    # puts "=> #{@state.class} display: #{@state.display}" # DEBUG
   end
 end
 
