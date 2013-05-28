@@ -3,7 +3,7 @@ class SafeState
   attr_accessor :input
   attr_reader :lock
   attr_reader :door
-  attr_reader :pin
+  attr_reader :pin_length
 
   def initialize(display_text: "", lock: :locked, door: :closed, pin: "123456")
     @input = {}
@@ -125,8 +125,8 @@ class Safe
     @state = SafeState.new
   end
 
-  def pin()
-    @state.pin
+  def pin_length()
+    @state.pin_length
   end
 
   def lock()
