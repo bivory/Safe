@@ -9,17 +9,17 @@ Run `git clone https://github.com/bivory/Safe.git` to clone the repository. Foll
 ## Ubuntu Installation
 
 `gem install bundler` to install Bundler.
-Run the `bundle` command i the root directory to install the dependencies.
+Run the `bundle` command in the root directory to install the dependencies.
 
 ## OS X Installation
 
 `brew install ruby` (2.0.0) using [Homebrew](http://brew.sh/).
 `gem install bundler` to install Bundler.
-Run the `bundle` command i the root directory to install the dependencies.
+Run the `bundle` command in the root directory to install the dependencies.
 
 ## How to run the tests
 
-The command `cucumber` in the root directory will run all tests.
+Runing the command `cucumber` in the root directory will run all specification tests.
 
 ## License
 
