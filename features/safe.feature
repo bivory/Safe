@@ -113,3 +113,12 @@ Feature: Interacting with a Safe
     And the display shows OPEN
     And the safe should be unlocked
     And the door can be opened
+
+  Scenario: Locking an already locked safe
+    Given I have a safe
+    And the safe is locked
+    And the door is closed
+    When I hit the LOCK button
+    Then the safe should be locked
+    And the door should be closed
+    And the display shows ERROR
