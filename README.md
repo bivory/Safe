@@ -1,6 +1,6 @@
 # Safe
 
-Safe is an example of BDD in [Ruby](http://www.ruby-lang.org/) using [Cucumber](http://cukes.info/) and [RSpec](http://rspec.info/). It implements a six button safe using user stories to define the behaviors and interactions.
+Safe is an example of BDD in [Ruby](http://www.ruby-lang.org/) using [Cucumber](http://cukes.info/) and [RSpec](http://rspec.info/). It implements a safe using user stories to define the behaviors and interactions. The safe has a six digit display, a number pad for the digits 0-9 and open, new pin and lock buttons.
 
 ## Cloning the repository
 
