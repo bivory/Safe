@@ -57,3 +57,7 @@ end
 Then(/^the door should be closed$/) do
   @safe.is_door_open?.should eq(false)
 end
+
+Then(/^the door should be open$/) do
+  @safe.is_door_open?.should eq(true)
+end
